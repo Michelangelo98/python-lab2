@@ -16,7 +16,7 @@ def choose_from_menu(scelta,errore):
 
         print("\n\n\n")
 
-        if choose >= 1 and choose <= 4:
+        if choose >= 1 and choose <= 5:
 
             close = True
 
@@ -29,6 +29,7 @@ def choose_from_menu(scelta,errore):
 
 
     return choose
+
 
 def insert_a_new_task():
 
@@ -56,6 +57,29 @@ def remove_task() :
 
         todo_list.remove(to_remove)
 
+#I utilize a big amount of memory!
+def remove_by_substring() :
+    to_remove = input("Task to remove (by substring):")
+    remove_list = []
+
+    #utilizzo il for-list per evitare un "out of range"
+    for action in todo_list :
+
+        if action.count(to_remove) != 0:
+            remove_list.append(action)
+
+
+
+    if remove_list.__len__() == 0:
+        print("Task not found")
+    else:
+        for action_to_remove in remove_list:
+            todo_list.remove(action_to_remove)
+
+
+
+
+
 
 
 if __name__ == '__main__':
@@ -69,7 +93,10 @@ if __name__ == '__main__':
 
     3. show all the tasks; 
 
-    4. close the program."""
+    4. close the program.
+    
+    5. remove task by substring
+    """
 
     msg_errore = "Choose between (1,4)"
     """
@@ -79,6 +106,7 @@ if __name__ == '__main__':
     x="\n"
     todo_list = [x.strip() for x in todo_list]
     """
+    #Im enable in using with
 
     file_in = open(argv[1])
     todo_list = file_in.readlines()
@@ -107,6 +135,9 @@ if __name__ == '__main__':
         elif scelta == 3:
 
             show_all_task()
+
+        elif scelta == 5:
+            remove_by_substring()
 
         scelta = choose_from_menu(msg_scelta, msg_errore)
 
