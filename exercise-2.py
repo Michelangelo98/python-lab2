@@ -112,7 +112,7 @@ if __name__ == '__main__':
     todo_list = [x.strip() for x in todo_list]
     """
     #Im enable in using with
-    #I have to control if the file was correctly open -> use try statement
+
     file_in = open(argv[1])
 
     #I can save a file in a list in a simpler way
@@ -160,6 +160,3 @@ if __name__ == '__main__':
 
 
     file_out.close()
-
-
-
