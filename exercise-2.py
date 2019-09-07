@@ -1,5 +1,6 @@
 from sys import argv
- #ieruvn
+
+
 def choose_from_menu(scelta,errore):
 
 
@@ -12,7 +13,12 @@ def choose_from_menu(scelta,errore):
 
     while not close:
 
-        choose = int(input(scelta))
+        string = input(scelta)
+
+        if string.isdigit() :
+            choose = int(string)
+        else:
+            choose = 0
 
         print("\n\n\n")
 
@@ -23,9 +29,6 @@ def choose_from_menu(scelta,errore):
         else:
 
             print(errore)
-
-
-
 
 
     return choose
@@ -47,15 +50,17 @@ def remove_task() :
 
     to_remove = input("Task to remove (by exactly):")
 
-
-
-    if todo_list.count(to_remove) == 0 :
+    number_of_occurrence = todo_list.count(to_remove)
+    #altternativa: if to_remove in todo_list
+    if number_of_occurrence == 0 :
 
         print("Task not found")
 
     else:
+        #with this for i can remove all occurrences
+        for n in range (0,number_of_occurrence):
 
-        todo_list.remove(to_remove)
+            todo_list.remove(to_remove)
 
 #I utilize a big amount of memory!
 def remove_by_substring() :
@@ -107,12 +112,18 @@ if __name__ == '__main__':
     todo_list = [x.strip() for x in todo_list]
     """
     #Im enable in using with
-
+    #I have to control if the file was correctly open -> use try statement
     file_in = open(argv[1])
+
+    #I can save a file in a list in a simpler way
+    '''
     todo_list = file_in.readlines()
 
     for number in range(0,todo_list.__len__()) :
         todo_list[number] = todo_list[number].strip("\n")
+        
+    '''
+    todo_list=file_in.read().splitlines()
     file_in.close()
 
     file_out = open(argv[1],'w')
@@ -149,3 +160,6 @@ if __name__ == '__main__':
 
 
     file_out.close()
+
+
+
